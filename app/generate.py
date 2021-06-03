@@ -6,7 +6,7 @@ from feedgen.feed import FeedGenerator
 def generate_feed(parsed_feed):
     fg = FeedGenerator()
     person = parsed_feed["feed_title"]
-    fg.title(f"ACL Antology for {person}")
+    fg.title(f"{person} (ACL Antology)")
     fg.author({"name": person})
     slug = parsed_feed["slug"]
     fg.id(slug)
