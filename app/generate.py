@@ -14,7 +14,7 @@ def generate_feed(parsed_feed):
     fg.language("en")
     fg.generator(generator="acl-feed", uri="https://acl-feed.madflex.de", version="1")
 
-    for item in parsed_feed.get("feed"):
+    for item in reversed(parsed_feed.get("feed", [])):
         fe = fg.add_entry()
         fe.id(item["link"].split("/")[-2])
         fe.title(item["title"])
