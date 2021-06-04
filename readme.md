@@ -7,7 +7,7 @@ Return an Atom feed for every author on https://aclanthology.org until there is 
 [1] https://github.com/acl-org/acl-anthology/issues/358
 
 
-production version: http://acl-feed.madflex.de/
+production version: https://acl-feed.madflex.de/
 
 
 ### development
