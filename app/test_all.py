@@ -1,16 +1,25 @@
 from pathlib import Path
 
+import httpx
 import pytest
 from generate import generate_feed
 from parse import parse_html
 
 
 @pytest.fixture
-def example_html():
-    fn = Path(__file__).parent.absolute() / "fixtures/andreas-madsack.html"
-    yield fn.open().read()
+def example_html(request):
+    if request.param:
+        response = httpx.get(
+            "https://www.aclweb.org/anthology/people/a/andreas-madsack/"
+        )
+        data = response.text
+    else:
+        fn = Path(__file__).parent.absolute() / "fixtures/andreas-madsack.html"
+        data = fn.open().read()
+    yield data
 
 
+@pytest.mark.parametrize("example_html", (False, True), indirect=True)
 def test_parse_html(example_html):
     result = parse_html(example_html, "andreas-madsack")
     assert result["feed_title"] == "Andreas Madsack"
@@ -31,6 +40,7 @@ def test_parse_html(example_html):
     assert feed[0]["link"] == "/anthology/W19-4201/"
 
 
+@pytest.mark.parametrize("example_html", (False, True), indirect=True)
 def test_generate_feed(example_html):
     feed_data = parse_html(example_html, "andreas-madsack")
     result = generate_feed(feed_data)
