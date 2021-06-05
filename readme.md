@@ -2,13 +2,11 @@
 
 ### about
 
-Return an Atom feed for every author on https://aclanthology.org until there is an official feed[1].
+Return an Atom feed for people on https://aclanthology.org until there is an official feed[^1].
 
-[1] https://github.com/acl-org/acl-anthology/issues/358
+deployed version: https://acl-feed.madflex.de/
 
-
-production version: https://acl-feed.madflex.de/
-
+[^1] https://github.com/acl-org/acl-anthology/issues/358
 
 ### development
 
