@@ -31,6 +31,7 @@ async def home():
                 (
                     "https://www.aclweb.org/anthology/people/",
                     "https://www.aclanthology.org/people/",
+                    "https://aclanthology.org/people/",
                 )
             ):
                 if url[-1] == "/":
