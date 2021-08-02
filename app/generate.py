@@ -18,7 +18,7 @@ def generate_feed(parsed_feed):
         fe = fg.add_entry()
         fe.id(item["link"].split("/")[-2])
         fe.title(item["title"])
-        fe.link(href="https://www.aclweb.org" + item["link"])
+        fe.link(href="https://aclanthology.org" + item["link"])
         fe.author({"name": ", ".join(item["authors"])})
         content = "<p>In: " + item["volume"] + "</p>"
         if "abstract" in item:
