@@ -45,4 +45,4 @@ def test_generate_feed(example_html):
     feed_data = parse_html(example_html, "andreas-madsack")
     result = generate_feed(feed_data)
     # FIXME: not the best way to test this
-    assert len(result.decode()) == 4209
+    assert len(result.decode()) == 4169
