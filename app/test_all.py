@@ -37,7 +37,7 @@ def test_parse_html(example_html):
     }
     assert set(feed[0].get("authors")) == {"Andreas Madsack", "Robert Weißgraeber"}
     assert feed[0]["year"] == "2019"
-    assert feed[0]["link"] == "/anthology/W19-4201/"
+    assert feed[0]["link"] == "/W19-4201/"
 
 
 @pytest.mark.parametrize("example_html", (False, True), indirect=True)
