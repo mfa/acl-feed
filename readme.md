@@ -23,3 +23,10 @@ FLASK_APP=app.main flask run
 ```
 flyctl deploy
 ```
+
+
+### run tests
+
+```
+python -m pytest
+```
