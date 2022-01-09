@@ -10,7 +10,8 @@ from parse import parse_html
 def example_html(request):
     if request.param:
         response = httpx.get(
-            "https://www.aclweb.org/anthology/people/a/andreas-madsack/"
+            "https://aclanthology.org/people/a/andreas-madsack/",
+            follow_redirects=True
         )
         data = response.text
     else:

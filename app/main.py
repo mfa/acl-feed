@@ -11,8 +11,8 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 
 @app.route("/<person>.atom")
 async def person_feed(person):
-    url = f"https://www.aclweb.org/anthology/people/{person[0]}/{person}/"
-    async with httpx.AsyncClient() as client:
+    url = f"https://aclanthology.org/people/{person[0]}/{person}/"
+    async with httpx.AsyncClient(follow_redirects=True) as client:
         response = await client.get(url)
     if response.status_code == 200:
         feed = generate_feed(parse_html(response.text, person))
