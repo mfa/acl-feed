@@ -1,5 +1,9 @@
 ## ACL Anthology People Feed
 
+[![Run Tests](https://github.com/mfa/acl-feed/actions/workflows/tests.yml/badge.svg)](https://github.com/mfa/acl-feed/actions/workflows/tests.yml)
+[![Fly Deploy](https://github.com/mfa/acl-feed/actions/workflows/deploy.yml/badge.svg)](https://github.com/mfa/acl-feed/actions/workflows/deploy.yml)
+
+
 ### about
 
 Return an Atom feed for people on https://aclanthology.org until there is an official feed[^1].
