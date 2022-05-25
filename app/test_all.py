@@ -26,7 +26,7 @@ def test_parse_html(example_html):
     assert result["feed_title"] == "Andreas Madsack"
 
     feed = result["feed"]
-    assert len(feed) == 5
+    assert len(feed) == 6
     assert feed[0].keys() == {
         "abstract",
         "authors",
