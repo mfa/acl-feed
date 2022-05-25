@@ -36,9 +36,9 @@ def test_parse_html(example_html):
         "volume_link",
         "year",
     }
-    assert set(feed[0].get("authors")) == {"Andreas Madsack", "Robert Weißgraeber"}
-    assert feed[0]["year"] == "2019"
-    assert feed[0]["link"] == "/W19-4201/"
+    assert set(feed[-1].get("authors")) == {"Andreas Madsack", "Robert Weißgraeber"}
+    assert feed[-1]["year"] == "2017"
+    assert feed[-1]["link"] == "/W17-3524/"
 
 
 @pytest.mark.parametrize("example_html", (False, True), indirect=True)
@@ -46,4 +46,4 @@ def test_generate_feed(example_html):
     feed_data = parse_html(example_html, "andreas-madsack")
     result = generate_feed(feed_data)
     # FIXME: not the best way to test this
-    assert len(result.decode()) == 4169
+    assert len(result.decode()) == 5507
