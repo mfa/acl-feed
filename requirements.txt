@@ -3,5 +3,5 @@ beautifulsoup4==4.11.1
 feedgen==0.9.0
 gunicorn==20.1.0
 httpx==0.23.0
-lxml==4.8.0
+lxml==4.9.1
 pytest==7.1.2
