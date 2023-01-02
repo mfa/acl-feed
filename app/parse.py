@@ -32,7 +32,9 @@ def parse_html(html_data, slug):
         elif item.name == "p":
             if element:
                 feed.append(element)
-            badges, meta = item.children
+            children = list(item.children)
+            badges = children[0]
+            meta = children[-1]
             element = parse_meta(meta)
             element["year"] = year
         elif item.name == "div" and "card" in item["class"]:
