@@ -1,12 +1,12 @@
 ---
 name: Fly Deploy
-# yamllint disable rule:truthy
-on:
-  workflow_run:
-    workflows: ["Run Tests"]
-    branches: [main]
-    types: [completed]
-# yamllint enable
+# # yamllint disable rule:truthy
+# on:
+#   workflow_run:
+#     workflows: ["Run Tests"]
+#     branches: [main]
+#     types: [completed]
+# # yamllint enable
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
