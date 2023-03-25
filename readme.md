@@ -29,6 +29,13 @@ flyctl deploy
 ```
 
 
+### deployment on google cloudrun
+
+```
+gcloud builds submit --tag eu.gcr.io/<PROJECT_ID>/acl-feed
+gcloud run deploy acl-feed --image eu.gcr.io/<PROJECT_ID>/acl-feed --allow-unauthenticated
+```
+
 ### run tests
 
 ```
