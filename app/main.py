@@ -1,5 +1,14 @@
 import httpx
-from flask import Flask, Response, abort, redirect, render_template, request, url_for
+from flask import (
+    Flask,
+    Response,
+    abort,
+    make_response,
+    redirect,
+    render_template,
+    request,
+    url_for,
+)
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from .generate import generate_feed
@@ -7,6 +16,13 @@ from .parse import parse_html
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
+
+
+@app.route("/robots.txt")
+async def robots():
+    response = make_response("User-Agent: *\nDisallow: /\n", 200)
+    response.mimetype = "text/plain"
+    return response
 
 
 @app.route("/<person>.atom")
