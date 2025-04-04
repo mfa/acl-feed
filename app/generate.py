@@ -40,7 +40,7 @@ def generate_feed_rss(parsed_feed):
     fg.link(href=f"https://acl-feed.madflex.de/{slug}.rss", rel="self")
     fg.description(".")
 
-    for item in reversed(parsed_feed.get("feed", [])):
+    for item in parsed_feed.get("feed", []):
         fe = fg.add_entry()
         _id = "https://aclanthology.org/" + item["link"].split("/")[-2]
         fe.id(_id)
