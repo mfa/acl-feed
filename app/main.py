@@ -11,7 +11,7 @@ from flask import (
 )
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-from .generate import generate_feed
+from .generate import generate_feed_atom, generate_feed_rss
 from .parse import parse_html
 
 app = Flask(__name__)
@@ -26,12 +26,23 @@ async def robots():
 
 
 @app.route("/<person>.atom")
-async def person_feed(person):
+async def person_feed_atom(person):
     url = f"https://aclanthology.org/people/{person[0]}/{person}/"
     async with httpx.AsyncClient(follow_redirects=True) as client:
         response = await client.get(url)
         if response.status_code == 200:
-            feed = generate_feed(parse_html(response.text, person))
+            feed = generate_feed_atom(parse_html(response.text, person))
+            return Response(feed, mimetype="text/xml")
+    abort(404)
+
+
+@app.route("/<person>.rss")
+async def person_feed_rss(person):
+    url = f"https://aclanthology.org/people/{person[0]}/{person}/"
+    async with httpx.AsyncClient(follow_redirects=True) as client:
+        response = await client.get(url)
+        if response.status_code == 200:
+            feed = generate_feed_rss(parse_html(response.text, person))
             return Response(feed, mimetype="text/xml")
     abort(404)
 
@@ -53,7 +64,7 @@ async def home():
                 if url[-1] == "/":
                     url = url[:-1]
                 person = url.split("/")[-1]
-                return redirect(url_for("person_feed", person=person))
+                return redirect(url_for("person_feed_atom", person=person))
             message = request.form["url"] + " is not valid."
 
     return render_template("home.html", message=message)

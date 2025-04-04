@@ -2,7 +2,7 @@ from pathlib import Path
 
 import httpx
 import pytest
-from generate import generate_feed
+from generate import generate_feed_atom
 from parse import parse_html
 
 
@@ -43,6 +43,6 @@ def test_parse_html(example_html):
 @pytest.mark.parametrize("example_html", (False, True), indirect=True)
 def test_generate_feed(example_html):
     feed_data = parse_html(example_html, "andreas-madsack")
-    result = generate_feed(feed_data)
+    result = generate_feed_atom(feed_data)
     # FIXME: not the best way to test this
     assert len(result.decode()) in (5668, 5669)
