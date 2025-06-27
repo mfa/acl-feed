@@ -1,4 +1,5 @@
 FROM python:3.13
+ARG TARGETARCH
 
 COPY app /app
 COPY requirements.txt /tmp
