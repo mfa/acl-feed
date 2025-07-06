@@ -30,7 +30,7 @@ jobs:
       - name: Docker Login
         uses: docker/login-action@v3
         with:
-          registry: http://${{ env.FORGEJO_HOST }}
+          registry: https://${{ env.FORGEJO_HOST }}
           username: ${{ github.actor }}
           password: ${{ secrets.FORGEJO_PACKAGES_TOKEN_RW }}
       - name: Build and Push
