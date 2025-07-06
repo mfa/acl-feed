@@ -1,13 +1,13 @@
 FROM python:3.13
 ARG TARGETARCH
 
-COPY app /app
-COPY requirements.txt /tmp
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-RUN pip install -r /tmp/requirements.txt
+ADD . /code
+WORKDIR /code
+RUN uv sync --locked
 
 ENV PORT 8000
 EXPOSE 8000
-WORKDIR /
 
 CMD ["gunicorn", "app.main:app"]

@@ -1,0 +1,14 @@
+[project]
+name = "acl-feed"
+version = "0.0.1"
+requires-python = "==3.13.*"
+
+dependencies = [
+    "Flask[async]==3.1.0",
+    "beautifulsoup4==4.12.3",
+    "feedgen==1.0.0",
+    "gunicorn==23.0.0",
+    "httpx==0.28.1",
+    "lxml==5.3.0",
+    "pytest==8.3.4"
+]
