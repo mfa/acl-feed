@@ -10,4 +10,4 @@ RUN uv sync --locked
 ENV PORT 8000
 EXPOSE 8000
 
-CMD ["gunicorn", "app.main:app"]
+CMD ["uv", "run", "gunicorn", "app.main:app"]
