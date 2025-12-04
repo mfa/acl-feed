@@ -1,0 +1,17 @@
+---
+name: Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: https://github.com/astral-sh/setup-uv@v6
+        with:
+          python-version: 3.13
+          enable-cache: true
+      - name: Run tests with pytest
+        run: uv run python -m pytest
