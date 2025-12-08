@@ -50,3 +50,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.FORGEJO_HOST }}/mfa/acl-feed:latest
           context: .
+      - name: update deployed version
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.WATCHTOWER_TOKEN }}" \
+            http://wachtel.tail07efb.ts.net:8081/v1/update
