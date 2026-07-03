@@ -6,6 +6,11 @@ on:
   push:
 # yamllint enable
 
+# queue new runs behind the running one instead of cancelling it
+concurrency:
+  group: build
+  cancel-in-progress: false
+
 env:
   # internal forgejo registry of @mfa
   FORGEJO_HOST: forgejo.tail07efb.ts.net
