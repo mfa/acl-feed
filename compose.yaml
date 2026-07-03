@@ -1,0 +1,10 @@
+services:
+  acl-feed:
+    build:
+      context: .
+    environment:
+      LOGFIRE_TOKEN: FIXME
+      PYTHONUNBUFFERED: 0
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8021:8000"
