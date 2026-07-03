@@ -52,5 +52,5 @@ jobs:
           context: .
       - name: update deployed version
         run: |
-          curl -H "Authorization: Bearer ${{ secrets.WATCHTOWER_TOKEN }}" \
+          curl -X POST -H "Authorization: Bearer ${{ secrets.WATCHTOWER_TOKEN }}" \
             http://wachtel.tail07efb.ts.net:8081/v1/update
