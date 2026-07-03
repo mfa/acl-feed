@@ -27,7 +27,7 @@ async def robots():
 
 @app.route("/<person>.atom")
 async def person_feed_atom(person):
-    url = f"https://aclanthology.org/people/{person[0]}/{person}/"
+    url = f"https://aclanthology.org/people/{person}/"
     async with httpx.AsyncClient(follow_redirects=True) as client:
         response = await client.get(url)
         if response.status_code == 200:
@@ -38,7 +38,7 @@ async def person_feed_atom(person):
 
 @app.route("/<person>.rss")
 async def person_feed_rss(person):
-    url = f"https://aclanthology.org/people/{person[0]}/{person}/"
+    url = f"https://aclanthology.org/people/{person}/"
     async with httpx.AsyncClient(follow_redirects=True) as client:
         response = await client.get(url)
         if response.status_code == 200:
@@ -63,6 +63,8 @@ async def home():
             ):
                 if url[-1] == "/":
                     url = url[:-1]
+                if url.endswith("/unverified"):
+                    url = url.removesuffix("/unverified")
                 person = url.split("/")[-1]
                 return redirect(url_for("person_feed_atom", person=person))
             message = request.form["url"] + " is not valid."

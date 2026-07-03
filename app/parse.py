@@ -12,7 +12,7 @@ def parse_meta(data):
                 meta["authors"].append(item.text)
             else:
                 meta["volume"] = item.text
-                meta["volume_link"] = "https://www.aclweb.org" + item["href"]
+                meta["volume_link"] = "https://aclanthology.org" + item["href"]
     return meta
 
 
@@ -29,15 +29,13 @@ def parse_html(html_data, slug):
     for item in main_column.children:
         if item.name == "h4":
             year = item.text
-        elif item.name == "p":
+        elif item.name == "div" and "d-sm-flex" in item.get("class", []):
             if element:
                 feed.append(element)
-            children = list(item.children)
-            badges = children[0]
-            meta = children[-1]
+            meta = item.find("span", class_="d-block")
             element = parse_meta(meta)
             element["year"] = year
-        elif item.name == "div" and "card" in item["class"]:
+        elif item.name == "div" and "card" in item.get("class", []):
             element["abstract"] = item.text
     if element:
         feed.append(element)

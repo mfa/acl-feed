@@ -9,7 +9,7 @@ def generate_feed(parsed_feed):
     fg.title(f"{person} (ACL Antology)")
     fg.author({"name": person})
     slug = parsed_feed["slug"]
-    fg.id(f"https://aclanthology.org/people/{slug[0]}/{slug}/")
+    fg.id(f"https://aclanthology.org/people/{slug}/")
     fg.link(href=f"https://acl-feed.madflex.de/{slug}.atom", rel="self")
     fg.language("en")
     fg.generator(generator="acl-feed", uri="https://acl-feed.madflex.de", version="1")

@@ -10,7 +10,7 @@ from parse import parse_html
 def example_html(request):
     if request.param:
         response = httpx.get(
-            "https://aclanthology.org/people/a/andreas-madsack/", follow_redirects=True
+            "https://aclanthology.org/people/andreas-madsack/", follow_redirects=True
         )
         data = response.text
     else:
@@ -45,4 +45,4 @@ def test_generate_feed(example_html):
     feed_data = parse_html(example_html, "andreas-madsack")
     result = generate_feed_atom(feed_data)
     # FIXME: not the best way to test this
-    assert len(result.decode()) in (5668, 5669)
+    assert len(result.decode()) in (5666, 5667)
