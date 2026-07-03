@@ -1,0 +1,12 @@
+.git
+.github
+.forgejo
+.venv
+.cache
+.pytest_cache
+.serena
+.streamlit
+__pycache__
+compose.yaml
+deploy.sh
+Dockerfile
