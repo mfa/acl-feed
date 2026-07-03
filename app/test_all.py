@@ -9,9 +9,15 @@ from parse import parse_html
 @pytest.fixture
 def example_html(request):
     if request.param:
-        response = httpx.get(
-            "https://aclanthology.org/people/andreas-madsack/", follow_redirects=True
-        )
+        try:
+            response = httpx.get(
+                "https://aclanthology.org/people/andreas-madsack/",
+                follow_redirects=True,
+                headers={"User-Agent": "acl-feed/1 (+https://acl-feed.madflex.de)"},
+            )
+            response.raise_for_status()
+        except httpx.HTTPError as exc:
+            pytest.skip(f"aclanthology.org not reachable: {exc}")
         data = response.text
     else:
         fn = Path(__file__).parent.absolute() / "fixtures/andreas-madsack.html"

@@ -17,6 +17,20 @@ from .parse import parse_html
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
+HEADERS = {"User-Agent": "acl-feed/1 (+https://acl-feed.madflex.de)"}
+
+
+async def fetch_person_page(person):
+    # aclanthology.org intermittently drops connections, so retry a few times
+    url = f"https://aclanthology.org/people/{person}/"
+    async with httpx.AsyncClient(follow_redirects=True, headers=HEADERS) as client:
+        for _ in range(2):
+            try:
+                return await client.get(url)
+            except httpx.HTTPError:
+                continue
+        return await client.get(url)
+
 
 @app.route("/robots.txt")
 async def robots():
@@ -27,23 +41,19 @@ async def robots():
 
 @app.route("/<person>.atom")
 async def person_feed_atom(person):
-    url = f"https://aclanthology.org/people/{person}/"
-    async with httpx.AsyncClient(follow_redirects=True) as client:
-        response = await client.get(url)
-        if response.status_code == 200:
-            feed = generate_feed_atom(parse_html(response.text, person))
-            return Response(feed, mimetype="text/xml")
+    response = await fetch_person_page(person)
+    if response.status_code == 200:
+        feed = generate_feed_atom(parse_html(response.text, person))
+        return Response(feed, mimetype="text/xml")
     abort(404)
 
 
 @app.route("/<person>.rss")
 async def person_feed_rss(person):
-    url = f"https://aclanthology.org/people/{person}/"
-    async with httpx.AsyncClient(follow_redirects=True) as client:
-        response = await client.get(url)
-        if response.status_code == 200:
-            feed = generate_feed_rss(parse_html(response.text, person))
-            return Response(feed, mimetype="text/xml")
+    response = await fetch_person_page(person)
+    if response.status_code == 200:
+        feed = generate_feed_rss(parse_html(response.text, person))
+        return Response(feed, mimetype="text/xml")
     abort(404)
 
 
